@@ -1,5 +1,7 @@
 {
     "variants": {
-      "": { "model": "minebetter:block/petrified_log" }
+      "axis=y":   { "model": "minebetter:block/petrified_log"},
+      "axis=x": { "model": "minebetter:block/petrified_log", "x": 90, "y": 90},
+      "axis=z":{ "model": "minebetter:block/petrified_log", "x": 90}
     }
   }

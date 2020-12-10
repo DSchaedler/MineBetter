@@ -1,6 +1,12 @@
 {
     "parent": "block/cube_all",
     "textures": {
-      "all": "minebetter:block/petrified_log"
+      "particle": "minebetter:block/petrified_log",
+      "down": "minebetter:block/petrified_log_top",
+      "up": "minebetter:block/petrified_log_top",
+      "north": "minebetter:block/petrified_log",
+      "east": "minebetter:block/petrified_log",
+      "south": "minebetter:block/petrified_log",
+      "west": "minebetter:block/petrified_log"
     }
   }

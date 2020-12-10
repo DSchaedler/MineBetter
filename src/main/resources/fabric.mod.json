@@ -22,8 +22,6 @@
       "com.dschaedler.minebetter.MineBetter"
     ]
   },
-  "mixins": [
-  ],
 
   "depends": {
     "fabricloader": ">=0.7.4",

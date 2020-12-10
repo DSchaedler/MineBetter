@@ -3,6 +3,7 @@ package com.dschaedler.minebetter;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Material;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -12,7 +13,7 @@ import net.minecraft.util.registry.Registry;
 public class MineBetter implements ModInitializer {
 
 	// Initialize Blocks
-	public static final PetrifiedLog PETRIFIED_LOG = new PetrifiedLog(FabricBlockSettings.of(Material.WOOD).hardness(2.0f));
+	public static final PillarBlock PETRIFIED_LOG = new PillarBlock(FabricBlockSettings.of(Material.WOOD).hardness(2.0f));
 	
 	@Override
 	public void onInitialize() {
