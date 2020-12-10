@@ -2,7 +2,7 @@
 
 A Fabric mod to make the underground just... better.
 
-# Mod Goals and Progress
+## Mod Goals and Progress
 https://trello.com/b/2WGjy92V/minebetter
 
 ## License
