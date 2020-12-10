@@ -1,9 +1,10 @@
-# Fabric Example Mod
+# MineBetter
 
-## Setup
+A Fabric mod to make the underground just... better.
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+# Mod Goals and Progress
+https://trello.com/b/2WGjy92V/minebetter
 
 ## License
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+This project is available under the MIT license. Feel free to learn from it and incorporate it in your own projects.
