@@ -3,27 +3,26 @@
   "id": "minebetter",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "MineBetter",
+  "description": "A Fabric mod to make the underground just... better.",
   "authors": [
-    "Me!"
+    "Dee_S"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/DSchaedler/MineBetter",
+    "sources": "https://github.com/DSchaedler/MineBetter"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "com.dschaedler.minebetter.MineBetter"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
   ],
 
   "depends": {

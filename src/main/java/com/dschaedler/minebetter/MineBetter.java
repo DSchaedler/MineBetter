@@ -1,8 +1,7 @@
-package net.fabricmc.example;
+package com.dschaedler.minebetter;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -10,10 +9,10 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-public class ExampleMod implements ModInitializer {
+public class MineBetter implements ModInitializer {
 
 	// Initialize Blocks
-	public static final Block PETRIFIED_LOG = new Block(FabricBlockSettings.of(Material.WOOD).hardness(2.0f));
+	public static final PetrifiedLog PETRIFIED_LOG = new PetrifiedLog(FabricBlockSettings.of(Material.WOOD).hardness(2.0f));
 	
 	@Override
 	public void onInitialize() {
