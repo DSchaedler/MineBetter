@@ -48,19 +48,28 @@ public class MineBetter implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
-
+		
+		// Say Hi!
+		System.out.println("[MineBetter] Hello from MineBetter!");
+		
 		// Register Blocks
+		System.out.println("[MineBetter] registering blocks...");
 		Registry.register(Registry.BLOCK, new Identifier("minebetter", "petrified_log"), PETRIFIED_LOG);
 		Registry.register(Registry.ITEM, new Identifier("minebetter", "petrified_log"), new BlockItem(PETRIFIED_LOG, new Item.Settings().group(ItemGroup.MISC)));
-		
+		System.out.println("[MineBetter] Block Registration Complete.");
+
 		// Spawn Petrified Logs with Configured Feature
 		// Register the ConfiguredFeature
+		System.out.println("[MineBetter] Registering Petrified Log spawner...");
 		RegistryKey<ConfiguredFeature<?, ?>> orePetrifiedLog = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
 			new Identifier("minebetter", "ore_petrified_log"));
 		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, orePetrifiedLog.getValue(), ORE_PETRIFIED_LOG);
 
 		//Spawn Logs
+		System.out.println("[MineBetter] Adding Petrified Log Biome Feature...");
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, orePetrifiedLog);
+
+		System.out.println("[MineBetter] Petrified Logs complete.");
 
 	}
 }
