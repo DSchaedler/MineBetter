@@ -61,9 +61,13 @@ public class MineBetter implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		
+		// --------
+
 		// Say Hi!
 		System.out.println("[MineBetter] Hello from MineBetter!");
 		
+		// --------
+
 		// Register Blocks
 		Registry.register(Registry.BLOCK, new Identifier("minebetter", "petrified_log"), PETRIFIED_LOG);
 		Registry.register(Registry.ITEM, new Identifier("minebetter", "petrified_log"), new BlockItem(PETRIFIED_LOG, new Item.Settings().group(MineBetter.ITEM_GROUP)));
@@ -71,9 +75,13 @@ public class MineBetter implements ModInitializer {
 		Registry.register(Registry.BLOCK, new Identifier("minebetter", "glass_trapdoor"), GLASS_TRAPDOOR_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier("minebetter", "glass_trapdoor"), new BlockItem(GLASS_TRAPDOOR_BLOCK, new Item.Settings().group(MineBetter.ITEM_GROUP)));
 
+		// --------
+
 		// Make the Glass Trapdoor transparent
 		// This works for now, but lets make sure this ends up client side only, yeah?
 		BlockRenderLayerMap.INSTANCE.putBlock(MineBetter.GLASS_TRAPDOOR_BLOCK, RenderLayer.getCutout());
+
+		// --------
 
 		// Spawn Petrified Logs with Configured Feature
 		// Register the ConfiguredFeature
