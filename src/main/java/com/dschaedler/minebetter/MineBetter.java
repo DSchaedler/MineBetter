@@ -1,9 +1,8 @@
 package com.dschaedler.minebetter;
 
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Material;
 import net.minecraft.block.PillarBlock;
@@ -11,6 +10,7 @@ import net.minecraft.client.render.RenderLayer;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
@@ -22,11 +22,11 @@ import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
-
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 
 public class MineBetter implements ModInitializer {
 
-	// Initialize Blocks
 	// Petrified Log
 	public static final PillarBlock PETRIFIED_LOG = new PillarBlock(
 		FabricBlockSettings.of(Material.WOOD).hardness(2.0f));
@@ -34,6 +34,8 @@ public class MineBetter implements ModInitializer {
 	// Glass Trapdoor
 	public static final MBTrapdoor GLASS_TRAPDOOR_BLOCK = new MBTrapdoor(
 		FabricBlockSettings.of(Material.GLASS).hardness(0.3f));
+
+	// --------
 
 	// ConfiguredFeature for Spawning Petrified Logs
 	private static ConfiguredFeature<?, ?> ORE_PETRIFIED_LOG = Feature.ORE
@@ -43,6 +45,15 @@ public class MineBetter implements ModInitializer {
 					5, // topOffset,
 					32 // maximum
 			))).spreadHorizontally().repeat(10); // Veins per Chunk
+
+	// --------
+
+	// Create the itemgroup / creative tab for the mod
+	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(
+		new Identifier("minebetter", "itemgroup"),
+		() -> new ItemStack(GLASS_TRAPDOOR_BLOCK));
+
+	// --------	
 
 	@Override
 	public void onInitialize() {
@@ -55,10 +66,10 @@ public class MineBetter implements ModInitializer {
 		
 		// Register Blocks
 		Registry.register(Registry.BLOCK, new Identifier("minebetter", "petrified_log"), PETRIFIED_LOG);
-		Registry.register(Registry.ITEM, new Identifier("minebetter", "petrified_log"), new BlockItem(PETRIFIED_LOG, new Item.Settings().group(ItemGroup.MISC)));
+		Registry.register(Registry.ITEM, new Identifier("minebetter", "petrified_log"), new BlockItem(PETRIFIED_LOG, new Item.Settings().group(MineBetter.ITEM_GROUP)));
 
 		Registry.register(Registry.BLOCK, new Identifier("minebetter", "glass_trapdoor"), GLASS_TRAPDOOR_BLOCK);
-		Registry.register(Registry.ITEM, new Identifier("minebetter", "glass_trapdoor"), new BlockItem(GLASS_TRAPDOOR_BLOCK, new Item.Settings().group(ItemGroup.MISC)));
+		Registry.register(Registry.ITEM, new Identifier("minebetter", "glass_trapdoor"), new BlockItem(GLASS_TRAPDOOR_BLOCK, new Item.Settings().group(MineBetter.ITEM_GROUP)));
 
 		// Make the Glass Trapdoor transparent
 		// This works for now, but lets make sure this ends up client side only, yeah?
