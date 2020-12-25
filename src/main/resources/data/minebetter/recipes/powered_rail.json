@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "G G",
+      "GSG",
+      "GRG"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:gold_ingot"
+      },
+      "S": {
+        "tag": "minecraft:wooden_slabs"
+      },
+      "R": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "result": {
+      "item": "minecraft:powered_rail",
+      "count": 16
+    }
+  }

@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      "ISI",
+      "ITI",
+      "ISI"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "S": {
+        "tag": "minecraft:wooden_slabs"
+      },
+      "T": {
+        "item": "minecraft:redstone_torch"
+      }
+    },
+    "result": {
+      "item": "minecraft:rail",
+      "count": 16
+    }
+  }
