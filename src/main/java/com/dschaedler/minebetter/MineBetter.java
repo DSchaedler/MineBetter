@@ -28,7 +28,7 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 public class MineBetter implements ModInitializer {
 
 	// Petrified Log
-	public static final PillarBlock PETRIFIED_LOG = new PillarBlock(
+	public static final PillarBlock PETRIFIED_LOG_BLOCK = new PillarBlock(
 		FabricBlockSettings.of(Material.WOOD).hardness(2.0f));
 
 	// Glass Trapdoor
@@ -40,7 +40,7 @@ public class MineBetter implements ModInitializer {
 	// ConfiguredFeature for Spawning Petrified Logs
 	private static ConfiguredFeature<?, ?> ORE_PETRIFIED_LOG = Feature.ORE
 			.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-					PETRIFIED_LOG.getDefaultState(), 5)) // Vein Size
+					PETRIFIED_LOG_BLOCK.getDefaultState(), 5)) // Vein Size
 			.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(0, // bottomOffset,
 					5, // topOffset,
 					32 // maximum
@@ -69,8 +69,8 @@ public class MineBetter implements ModInitializer {
 		// --------
 
 		// Register Blocks
-		Registry.register(Registry.BLOCK, new Identifier("minebetter", "petrified_log"), PETRIFIED_LOG);
-		Registry.register(Registry.ITEM, new Identifier("minebetter", "petrified_log"), new BlockItem(PETRIFIED_LOG, new Item.Settings().group(MineBetter.ITEM_GROUP)));
+		Registry.register(Registry.BLOCK, new Identifier("minebetter", "petrified_log"), PETRIFIED_LOG_BLOCK);
+		Registry.register(Registry.ITEM, new Identifier("minebetter", "petrified_log"), new BlockItem(PETRIFIED_LOG_BLOCK, new Item.Settings().group(MineBetter.ITEM_GROUP)));
 
 		Registry.register(Registry.BLOCK, new Identifier("minebetter", "glass_trapdoor"), GLASS_TRAPDOOR_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier("minebetter", "glass_trapdoor"), new BlockItem(GLASS_TRAPDOOR_BLOCK, new Item.Settings().group(MineBetter.ITEM_GROUP)));

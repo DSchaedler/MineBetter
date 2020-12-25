@@ -1,0 +1,12 @@
+{
+    "__COMMENT": "Blocks",
+    "item.minebetter.petrified_log": "Petrified Log",
+    "block.minebetter.petrified_log": "Petrified Log",
+    "item.minebetter.glass_trapdoor": "Glass Trapdoor",
+    "block.minebetter.glass_trapdoor": "Glass Trapdoor",
+
+    "__COMMENT": "Items",
+
+    "__COMMENT": "ItemGroup",
+    "itemGroup.minebetter.itemgroup": "Mine Better"
+}
