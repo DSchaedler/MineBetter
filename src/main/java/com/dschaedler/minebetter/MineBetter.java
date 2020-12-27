@@ -4,6 +4,10 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.InfestedBlock;
 import net.minecraft.block.Material;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.client.render.RenderLayer;
@@ -20,6 +24,7 @@ import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
 import net.minecraft.world.gen.feature.Feature;
+import net.minecraft.world.gen.feature.OceanRuinFeatureConfig;
 import net.minecraft.world.gen.feature.OreFeatureConfig;
 
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -39,12 +44,23 @@ public class MineBetter implements ModInitializer {
 
 	// ConfiguredFeature for Spawning Petrified Logs
 	private static ConfiguredFeature<?, ?> ORE_PETRIFIED_LOG = Feature.ORE
-			.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-					PETRIFIED_LOG_BLOCK.getDefaultState(), 5)) // Vein Size
-			.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(0, // bottomOffset,
-					5, // topOffset,
-					32 // maximum
-			))).spreadHorizontally().repeat(10); // Veins per Chunk
+		.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
+				PETRIFIED_LOG_BLOCK.getDefaultState(), 5)) // Vein Size
+		.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig( // Height Settings
+			0, // bottomOffset,
+			5, // topOffset,
+			32 // maximum
+		))).spreadHorizontally().repeat(10); // Veins per Chunk
+
+	// ConfiguredFeature for Spawning Silverfish Egg blocks
+	private static ConfiguredFeature<?, ?> ORE_SILVERFISH_EGG = Feature.ORE
+		.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
+			Blocks.INFESTED_STONE.getDefaultState(), 10)) // Vein Size
+		.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig( // Height Settings
+			0, // bottomOffset
+			5, // topOffset
+			32// maximum
+		))).spreadHorizontally().repeat(1); // Veins per chunk
 
 	// --------
 
@@ -88,6 +104,12 @@ public class MineBetter implements ModInitializer {
 		RegistryKey<ConfiguredFeature<?, ?>> orePetrifiedLog = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
 			new Identifier("minebetter", "ore_petrified_log"));
 		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, orePetrifiedLog.getValue(), ORE_PETRIFIED_LOG);
+
+		// Spawn Veins of Silverfish blocks
+		RegistryKey<ConfiguredFeature<?, ?>> oreSilverfishEgg = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
+		new Identifier("minebetter", "ore_silverfish_egg"));
+		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreSilverfishEgg.getValue(), ORE_SILVERFISH_EGG);
+
 
 		//Spawn Logs
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, orePetrifiedLog);
