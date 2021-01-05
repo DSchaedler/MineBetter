@@ -48,15 +48,15 @@ public class MineBetter implements ModInitializer {
 			32 // maximum
 		))).spreadHorizontally().repeat(10); // Veins per Chunk
 
-	// ConfiguredFeature for Spawning Silverfish Egg blocks
+	// ConfiguredFeature for Spawning Silverfish Egg BLocks
 	private static ConfiguredFeature<?, ?> ORE_SILVERFISH_EGG = Feature.ORE
 		.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-			Blocks.INFESTED_STONE.getDefaultState(), 10)) // Vein Size
+				Blocks.INFESTED_STONE.getDefaultState(), 9)) // Vein Size
 		.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig( // Height Settings
-			0, // bottomOffset
-			5, // topOffset
-			32// maximum
-		))).spreadHorizontally().repeat(1); // Veins per chunk
+			0, // bottomOffset,
+			5, // topOffset,
+			63 // maximum
+		))).spreadHorizontally().repeat(7); // Veins per Chunk
 
 	// --------
 
@@ -101,13 +101,15 @@ public class MineBetter implements ModInitializer {
 			new Identifier("minebetter", "ore_petrified_log"));
 		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, orePetrifiedLog.getValue(), ORE_PETRIFIED_LOG);
 
-		// Spawn Veins of Silverfish blocks
-		RegistryKey<ConfiguredFeature<?, ?>> oreSilverfishEgg = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
-		new Identifier("minebetter", "ore_silverfish_egg"));
-		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreSilverfishEgg.getValue(), ORE_SILVERFISH_EGG);
-
-
 		//Spawn Logs
 		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, orePetrifiedLog);
+
+		// Spawn Veins of Silverfish blocks
+		RegistryKey<ConfiguredFeature<?, ?>> oreSilverfishEgg = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
+			new Identifier("minebetter", "ore_silverfish_egg"));
+		Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreSilverfishEgg.getValue(), ORE_SILVERFISH_EGG);
+
+		//Spawn Silverfish
+		BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreSilverfishEgg);
 	}
 }
