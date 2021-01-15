@@ -3,11 +3,19 @@ package com.dschaedler.minebetter;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.client.rendereregistry.v1.EntityRendererRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.Material;
 import net.minecraft.block.PillarBlock;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.entity.EntityDimensions;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.attribute.DefaultAttributeContainer.Builder;
+import net.minecraft.entity.vehicle.HopperMinecartEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -28,42 +36,43 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 
 public class MineBetter implements ModInitializer {
 
+	public static final String MOD_ID = "minebetter";
+
 	// Petrified Log
 	public static final PillarBlock PETRIFIED_LOG_BLOCK = new PillarBlock(
-		FabricBlockSettings.of(Material.WOOD).hardness(2.0f));
+			FabricBlockSettings.of(Material.WOOD).hardness(2.0f));
 
 	// Glass Trapdoor
 	public static final MBTrapdoor GLASS_TRAPDOOR_BLOCK = new MBTrapdoor(
-		FabricBlockSettings.of(Material.GLASS).hardness(0.3f));
+			FabricBlockSettings.of(Material.GLASS).hardness(0.3f));
 
 	// --------
 
 	// ConfiguredFeature for Spawning Petrified Logs
 	private static ConfiguredFeature<?, ?> ORE_PETRIFIED_LOG = Feature.ORE
-		.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-				PETRIFIED_LOG_BLOCK.getDefaultState(), 5)) // Vein Size
-		.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig( // Height Settings
-			0, // bottomOffset,
-			5, // topOffset,
-			32 // maximum
-		))).spreadHorizontally().repeat(10); // Veins per Chunk
+			.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
+					PETRIFIED_LOG_BLOCK.getDefaultState(), 5)) // Vein Size
+			.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig( // Height Settings
+					0, // bottomOffset,
+					5, // topOffset,
+					32 // maximum
+			))).spreadHorizontally().repeat(10); // Veins per Chunk
 
 	// ConfiguredFeature for Spawning Silverfish Egg BLocks
 	private static ConfiguredFeature<?, ?> ORE_SILVERFISH_EGG = Feature.ORE
-		.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
-				Blocks.INFESTED_STONE.getDefaultState(), 9)) // Vein Size
-		.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig( // Height Settings
-			0, // bottomOffset,
-			5, // topOffset,
-			63 // maximum
-		))).spreadHorizontally().repeat(7); // Veins per Chunk
+			.configure(new OreFeatureConfig(OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
+					Blocks.INFESTED_STONE.getDefaultState(), 9)) // Vein Size
+			.decorate(Decorator.RANGE.configure(new RangeDecoratorConfig( // Height Settings
+					0, // bottomOffset,
+					5, // topOffset,
+					63 // maximum
+			))).spreadHorizontally().repeat(7); // Veins per Chunk
 
 	// --------
 
 	// Create the itemgroup / creative tab for the mod
-	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(
-		new Identifier("minebetter", "itemgroup"),
-		() -> new ItemStack(GLASS_TRAPDOOR_BLOCK));
+	public static final ItemGroup ITEM_GROUP = FabricItemGroupBuilder.build(new Identifier("minebetter", "itemgroup"),
+			() -> new ItemStack(GLASS_TRAPDOOR_BLOCK));
 
 	// --------	
 
@@ -80,12 +89,19 @@ public class MineBetter implements ModInitializer {
 		
 		// --------
 
+		MBEntities.register();
+
 		// Register Blocks
 		Registry.register(Registry.BLOCK, new Identifier("minebetter", "petrified_log"), PETRIFIED_LOG_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier("minebetter", "petrified_log"), new BlockItem(PETRIFIED_LOG_BLOCK, new Item.Settings().group(MineBetter.ITEM_GROUP)));
 
 		Registry.register(Registry.BLOCK, new Identifier("minebetter", "glass_trapdoor"), GLASS_TRAPDOOR_BLOCK);
 		Registry.register(Registry.ITEM, new Identifier("minebetter", "glass_trapdoor"), new BlockItem(GLASS_TRAPDOOR_BLOCK, new Item.Settings().group(MineBetter.ITEM_GROUP)));
+
+		// Register Minecart Renderer
+		EntityRendererRegistry.INSTANCE.register(MBEntities.TRACK_MINECART, (dispatcher, context) -> {
+            return new MBTrackMinecartRenderer(dispatcher);
+        });
 
 		// --------
 
